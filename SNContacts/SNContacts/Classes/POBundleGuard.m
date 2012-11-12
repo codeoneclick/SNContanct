@@ -65,7 +65,7 @@
     CFFileDescriptorEnableCallBacks(self->_kqRef, kCFFileDescriptorReadCallBack);
 }
 
-static void KQCallback(CFFileDescriptorRef kqRef, CFOptionFlags callBackTypes, void *info)
+void KQCallback(CFFileDescriptorRef kqRef, CFOptionFlags callBackTypes, void *info)
 {
     POBundleGuard *object;
     object = (__bridge POBundleGuard *) info;

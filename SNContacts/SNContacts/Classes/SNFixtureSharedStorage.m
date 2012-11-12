@@ -60,7 +60,6 @@
 
 - (void)onFixtureChanged:(POFixture *)fixture
 {
-    NSLog(@"Fixture with name %@ was changed", fixture.name);
     [self.storage setObject:fixture forKey:fixture.name];
     [self.delegate onFixtureChanged:self];
 }

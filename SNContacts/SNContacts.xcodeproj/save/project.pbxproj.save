@@ -21,10 +21,6 @@
 		15835CA1161CC8E40074FB90 /* SNMainPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15835C9F161CC8E40074FB90 /* SNMainPresenterViewController.m */; };
 		15835CA2161CC8E40074FB90 /* SNMainPresenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15835CA0161CC8E40074FB90 /* SNMainPresenterViewController.xib */; };
 		15835CA4161CEB2A0074FB90 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15835CA3161CEB2A0074FB90 /* QuartzCore.framework */; };
-		A465CF171651113000DF3A7F /* POBundleGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF151651113000DF3A7F /* POBundleGuard.m */; };
-		A465CF1C1651139F00DF3A7F /* SNFixtureSharedStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF1B1651139F00DF3A7F /* SNFixtureSharedStorage.m */; };
-		A465CF2C165136FF00DF3A7F /* POFixture.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF2B165136FF00DF3A7F /* POFixture.m */; };
-		A465CF34165147C200DF3A7F /* fixtures.plist in Resources */ = {isa = PBXBuildFile; fileRef = A465CF33165147C200DF3A7F /* fixtures.plist */; };
 		A4D1B2891642A88D00FA3BE5 /* SNSecondPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D1B2871642A88C00FA3BE5 /* SNSecondPresenterViewController.m */; };
 		A4D1B28A1642A88D00FA3BE5 /* SNSecondPresenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D1B2881642A88C00FA3BE5 /* SNSecondPresenterViewController.xib */; };
 /* End PBXBuildFile section */
@@ -50,14 +46,6 @@
 		15835C9F161CC8E40074FB90 /* SNMainPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNMainPresenterViewController.m; path = SNContacts/Classes/SNMainPresenterViewController.m; sourceTree = "<group>"; };
 		15835CA0161CC8E40074FB90 /* SNMainPresenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNMainPresenterViewController.xib; path = SNContacts/Classes/SNMainPresenterViewController.xib; sourceTree = "<group>"; };
 		15835CA3161CEB2A0074FB90 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A465CF141651113000DF3A7F /* POBundleGuard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POBundleGuard.h; path = SNContacts/Classes/POBundleGuard.h; sourceTree = "<group>"; };
-		A465CF151651113000DF3A7F /* POBundleGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POBundleGuard.m; path = SNContacts/Classes/POBundleGuard.m; sourceTree = "<group>"; };
-		A465CF181651117D00DF3A7F /* fixtures.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = fixtures.bundle; sourceTree = "<group>"; };
-		A465CF1A1651139F00DF3A7F /* SNFixtureSharedStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNFixtureSharedStorage.h; path = SNContacts/Classes/SNFixtureSharedStorage.h; sourceTree = "<group>"; };
-		A465CF1B1651139F00DF3A7F /* SNFixtureSharedStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNFixtureSharedStorage.m; path = SNContacts/Classes/SNFixtureSharedStorage.m; sourceTree = "<group>"; };
-		A465CF2A165136FE00DF3A7F /* POFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POFixture.h; path = SNContacts/Classes/POFixture.h; sourceTree = "<group>"; };
-		A465CF2B165136FF00DF3A7F /* POFixture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POFixture.m; path = SNContacts/Classes/POFixture.m; sourceTree = "<group>"; };
-		A465CF33165147C200DF3A7F /* fixtures.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fixtures.plist; sourceTree = "<group>"; };
 		A4D1B2861642A88C00FA3BE5 /* SNSecondPresenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNSecondPresenterViewController.h; path = SNContacts/Classes/SNSecondPresenterViewController.h; sourceTree = "<group>"; };
 		A4D1B2871642A88C00FA3BE5 /* SNSecondPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNSecondPresenterViewController.m; path = SNContacts/Classes/SNSecondPresenterViewController.m; sourceTree = "<group>"; };
 		A4D1B2881642A88C00FA3BE5 /* SNSecondPresenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNSecondPresenterViewController.xib; path = SNContacts/Classes/SNSecondPresenterViewController.xib; sourceTree = "<group>"; };
@@ -81,12 +69,9 @@
 		15835C5D161CC4D80074FB90 = {
 			isa = PBXGroup;
 			children = (
-				A465CEFA1650FF6C00DF3A7F /* Resources */,
 				15835C72161CC4D80074FB90 /* SNContacts */,
 				15835C6B161CC4D80074FB90 /* Frameworks */,
 				15835C69161CC4D80074FB90 /* Products */,
-				A465CF33165147C200DF3A7F /* fixtures.plist */,
-				A465CF181651117D00DF3A7F /* fixtures.bundle */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,9 +120,6 @@
 		15835C8F161CC7FB0074FB90 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A465CF101651111000DF3A7F /* External */,
-				A465CF121651111900DF3A7F /* Model */,
-				A465CF131651111F00DF3A7F /* Views */,
 				15835C98161CC84A0074FB90 /* Controllers */,
 				15835C90161CC8430074FB90 /* SNAppDelegate.h */,
 				15835C91161CC8430074FB90 /* SNAppDelegate.m */,
@@ -162,41 +144,6 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		A465CEFA1650FF6C00DF3A7F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			path = SNContacts/Resources;
-			sourceTree = "<group>";
-		};
-		A465CF101651111000DF3A7F /* External */ = {
-			isa = PBXGroup;
-			children = (
-				A465CF141651113000DF3A7F /* POBundleGuard.h */,
-				A465CF151651113000DF3A7F /* POBundleGuard.m */,
-				A465CF2A165136FE00DF3A7F /* POFixture.h */,
-				A465CF2B165136FF00DF3A7F /* POFixture.m */,
-			);
-			name = External;
-			sourceTree = "<group>";
-		};
-		A465CF121651111900DF3A7F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				A465CF1A1651139F00DF3A7F /* SNFixtureSharedStorage.h */,
-				A465CF1B1651139F00DF3A7F /* SNFixtureSharedStorage.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		A465CF131651111F00DF3A7F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -207,7 +154,6 @@
 				15835C64161CC4D80074FB90 /* Sources */,
 				15835C65161CC4D80074FB90 /* Frameworks */,
 				15835C66161CC4D80074FB90 /* Resources */,
-				A465CF321651406C00DF3A7F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -257,27 +203,10 @@
 				15835C97161CC8430074FB90 /* SNViewController.xib in Resources */,
 				15835CA2161CC8E40074FB90 /* SNMainPresenterViewController.xib in Resources */,
 				A4D1B28A1642A88D00FA3BE5 /* SNSecondPresenterViewController.xib in Resources */,
-				A465CF34165147C200DF3A7F /* fixtures.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A465CF321651406C00DF3A7F /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "BUNDLE_FOLDER=\"${SRCROOT}/fixtures.bundle/\"\nFIXTURE_PLIST=\"${SRCROOT}/fixtures.plist\"\nFIXTURE_PATH=$(/usr/libexec/PlistBuddy -c \"Print FIXTURE_PATH\" \"$FIXTURE_PLIST\")\n\nif [[ \"${FIXTURE_PATH}\" == *\"Does Not Exist\"* ]]; then\necho \"Create FIXTURE_PATH with value ${BUNDLE_FOLDER}\"\n/usr/libexec/PlistBuddy -c \"Add FIXTURE_PATH $BUNDLE_FOLDER\" \"$FIXTURE_PLIST\"\nelse\necho \"set FIXTURE_PATH to ${BUNDLE_FOLDER}\"\n/usr/libexec/PlistBuddy -c \"Set FIXTURE_PATH $BUNDLE_FOLDER\" \"$FIXTURE_PLIST\"\nfi\n\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		15835C64161CC4D80074FB90 /* Sources */ = {
@@ -289,9 +218,6 @@
 				15835C96161CC8430074FB90 /* SNViewController.m in Sources */,
 				15835CA1161CC8E40074FB90 /* SNMainPresenterViewController.m in Sources */,
 				A4D1B2891642A88D00FA3BE5 /* SNSecondPresenterViewController.m in Sources */,
-				A465CF171651113000DF3A7F /* POBundleGuard.m in Sources */,
-				A465CF1C1651139F00DF3A7F /* SNFixtureSharedStorage.m in Sources */,
-				A465CF2C165136FF00DF3A7F /* POFixture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +289,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SNContacts/SNContacts-Prefix.pch";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "SNContacts/SNContacts-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

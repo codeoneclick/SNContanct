@@ -12,11 +12,3 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
-
-// *IMPORTANT* -- Don't leave injection enabled when releasing! //
-
-#ifdef DEBUG
-#define INJECTION_ENABLED
-#endif
-
-#import "/Applications/Injection Plugin.app/Contents/Resources/BundleInterface.h"

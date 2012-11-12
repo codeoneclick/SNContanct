@@ -8,15 +8,13 @@
 
 #import "SNMainPresenterViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SNFixtureSharedStorage.h"
-#import "POFixture.h"
 
-@interface SNMainPresenterViewController ()<SNFixtureSharedStorageProtocol>
+@interface SNMainPresenterViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *bodyTextLabel;
 
 @end
 
-@implementation SNMainPresenterViewController
+@implementation _injectable(SNMainPresenterViewController)
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,10 +41,11 @@
     [self rotateView:self.view withDuration:0.5 angle:M_PI * 4 withAlpha:1 completion:^{
 
     }];
-    POFixture* fixture = [[SNFixtureSharedStorage sharedInstance].storage objectForKey:kFixtureTest];
-    NSString *content = fixture.content;
-    [SNFixtureSharedStorage sharedInstance].delegate = self;
-    [self.bodyTextLabel setText:content];
+    NSString* path = [[NSBundle mainBundle] resourcePath];
+    __autoreleasing NSError* error = nil;
+    NSString *fileContent = [[NSString alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/fixture.json", path] encoding:NSUTF8StringEncoding error:&error];
+    fileContent = @"hello world";
+    [self.bodyTextLabel setText:fileContent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -56,19 +55,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [SNFixtureSharedStorage sharedInstance].delegate = nil;
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-- (void)onFixtureChanged:(SNFixtureSharedStorage *)fixtureStorage
-{
-    POFixture* fixture = [[SNFixtureSharedStorage sharedInstance].storage objectForKey:kFixtureTest];
-    NSString *content = fixture.content;
-    [self.bodyTextLabel setText:content];
 }
 
 - (IBAction)onButtonAction:(id)sender

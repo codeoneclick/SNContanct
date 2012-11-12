@@ -17,7 +17,7 @@
 
 @end
 
-@implementation SNViewController
+@implementation _injectable(SNViewController)
 
 - (void)viewDidLoad
 {

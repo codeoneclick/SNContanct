@@ -25,6 +25,7 @@
 		A465CF1C1651139F00DF3A7F /* SNFixtureSharedStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF1B1651139F00DF3A7F /* SNFixtureSharedStorage.m */; };
 		A465CF2C165136FF00DF3A7F /* POFixture.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF2B165136FF00DF3A7F /* POFixture.m */; };
 		A465CF34165147C200DF3A7F /* fixtures.plist in Resources */ = {isa = PBXBuildFile; fileRef = A465CF33165147C200DF3A7F /* fixtures.plist */; };
+		A47E219C1668AED100A64102 /* POClassScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = A47E219B1668AED100A64102 /* POClassScanner.m */; };
 		A4D1B2891642A88D00FA3BE5 /* SNSecondPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D1B2871642A88C00FA3BE5 /* SNSecondPresenterViewController.m */; };
 		A4D1B28A1642A88D00FA3BE5 /* SNSecondPresenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D1B2881642A88C00FA3BE5 /* SNSecondPresenterViewController.xib */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,8 @@
 		A465CF2A165136FE00DF3A7F /* POFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POFixture.h; path = SNContacts/Classes/POFixture.h; sourceTree = "<group>"; };
 		A465CF2B165136FF00DF3A7F /* POFixture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POFixture.m; path = SNContacts/Classes/POFixture.m; sourceTree = "<group>"; };
 		A465CF33165147C200DF3A7F /* fixtures.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fixtures.plist; sourceTree = "<group>"; };
+		A47E219A1668AED100A64102 /* POClassScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POClassScanner.h; path = SNContacts/Classes/POClassScanner.h; sourceTree = "<group>"; };
+		A47E219B1668AED100A64102 /* POClassScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POClassScanner.m; path = SNContacts/Classes/POClassScanner.m; sourceTree = "<group>"; };
 		A4D1B2861642A88C00FA3BE5 /* SNSecondPresenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNSecondPresenterViewController.h; path = SNContacts/Classes/SNSecondPresenterViewController.h; sourceTree = "<group>"; };
 		A4D1B2871642A88C00FA3BE5 /* SNSecondPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNSecondPresenterViewController.m; path = SNContacts/Classes/SNSecondPresenterViewController.m; sourceTree = "<group>"; };
 		A4D1B2881642A88C00FA3BE5 /* SNSecondPresenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNSecondPresenterViewController.xib; path = SNContacts/Classes/SNSecondPresenterViewController.xib; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				A465CF151651113000DF3A7F /* POBundleGuard.m */,
 				A465CF2A165136FE00DF3A7F /* POFixture.h */,
 				A465CF2B165136FF00DF3A7F /* POFixture.m */,
+				A47E219A1668AED100A64102 /* POClassScanner.h */,
+				A47E219B1668AED100A64102 /* POClassScanner.m */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				A465CF171651113000DF3A7F /* POBundleGuard.m in Sources */,
 				A465CF1C1651139F00DF3A7F /* SNFixtureSharedStorage.m in Sources */,
 				A465CF2C165136FF00DF3A7F /* POFixture.m in Sources */,
+				A47E219C1668AED100A64102 /* POClassScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

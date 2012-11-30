@@ -9,15 +9,24 @@
 #import "SNViewController.h"
 #import "SNMainPresenterViewController.h"
 #import "SNSecondPresenterViewController.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
+#import "POClassScanner.h"
 
 @interface SNViewController ()
 
 @property(nonatomic, strong) SNMainPresenterViewController* vc_01;
 @property(nonatomic, strong) SNSecondPresenterViewController* vc_02;
+@property(atomic, copy) id test;
 
 @end
 
 @implementation SNViewController
+
++ (void)testClassMethod
+{
+    
+}
 
 - (void)viewDidLoad
 {
@@ -26,6 +35,8 @@
     self.vc_02 = [SNSecondPresenterViewController new];
     [self addChildViewController:self.vc_01];
     [self addChildViewController:self.vc_02];
+
+    [[POClassScanner sharedInstance] scanWithPredicate:[NSPredicate predicateWithFormat:@"self beginswith 'SN'"]];
 }
 
 - (void)didReceiveMemoryWarning

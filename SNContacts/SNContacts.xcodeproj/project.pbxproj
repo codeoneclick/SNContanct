@@ -21,6 +21,7 @@
 		15835CA1161CC8E40074FB90 /* SNMainPresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15835C9F161CC8E40074FB90 /* SNMainPresenterViewController.m */; };
 		15835CA2161CC8E40074FB90 /* SNMainPresenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15835CA0161CC8E40074FB90 /* SNMainPresenterViewController.xib */; };
 		15835CA4161CEB2A0074FB90 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15835CA3161CEB2A0074FB90 /* QuartzCore.framework */; };
+		A40A00EF166CF39D007F2B8E /* PORuntimeDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A40A00EE166CF39D007F2B8E /* PORuntimeDecoder.m */; };
 		A465CF171651113000DF3A7F /* POBundleGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF151651113000DF3A7F /* POBundleGuard.m */; };
 		A465CF1C1651139F00DF3A7F /* SNFixtureSharedStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF1B1651139F00DF3A7F /* SNFixtureSharedStorage.m */; };
 		A465CF2C165136FF00DF3A7F /* POFixture.m in Sources */ = {isa = PBXBuildFile; fileRef = A465CF2B165136FF00DF3A7F /* POFixture.m */; };
@@ -51,6 +52,8 @@
 		15835C9F161CC8E40074FB90 /* SNMainPresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNMainPresenterViewController.m; path = SNContacts/Classes/SNMainPresenterViewController.m; sourceTree = "<group>"; };
 		15835CA0161CC8E40074FB90 /* SNMainPresenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SNMainPresenterViewController.xib; path = SNContacts/Classes/SNMainPresenterViewController.xib; sourceTree = "<group>"; };
 		15835CA3161CEB2A0074FB90 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A40A00ED166CF39C007F2B8E /* PORuntimeDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PORuntimeDecoder.h; path = SNContacts/Classes/PORuntimeDecoder.h; sourceTree = "<group>"; };
+		A40A00EE166CF39D007F2B8E /* PORuntimeDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PORuntimeDecoder.m; path = SNContacts/Classes/PORuntimeDecoder.m; sourceTree = "<group>"; };
 		A465CF141651113000DF3A7F /* POBundleGuard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POBundleGuard.h; path = SNContacts/Classes/POBundleGuard.h; sourceTree = "<group>"; };
 		A465CF151651113000DF3A7F /* POBundleGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POBundleGuard.m; path = SNContacts/Classes/POBundleGuard.m; sourceTree = "<group>"; };
 		A465CF181651117D00DF3A7F /* fixtures.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = fixtures.bundle; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				A465CF2B165136FF00DF3A7F /* POFixture.m */,
 				A47E219A1668AED100A64102 /* POClassScanner.h */,
 				A47E219B1668AED100A64102 /* POClassScanner.m */,
+				A40A00ED166CF39C007F2B8E /* PORuntimeDecoder.h */,
+				A40A00EE166CF39D007F2B8E /* PORuntimeDecoder.m */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				A465CF1C1651139F00DF3A7F /* SNFixtureSharedStorage.m in Sources */,
 				A465CF2C165136FF00DF3A7F /* POFixture.m in Sources */,
 				A47E219C1668AED100A64102 /* POClassScanner.m in Sources */,
+				A40A00EF166CF39D007F2B8E /* PORuntimeDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

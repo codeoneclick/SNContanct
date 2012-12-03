@@ -9,6 +9,7 @@
 #import "POClassScanner.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
+#import "PORuntimeDecoder.h"
 
 extern const struct POClassKeys
 {
@@ -17,6 +18,11 @@ extern const struct POClassKeys
     __unsafe_unretained NSString* properties;
     __unsafe_unretained NSString* classMethods;
     __unsafe_unretained NSString* instanceMethods;
+    __unsafe_unretained NSString* protocols;
+    __unsafe_unretained NSString* protocolName;
+    __unsafe_unretained NSString* protocolProperties;
+    __unsafe_unretained NSString* protocolMandatoryMethods;
+    __unsafe_unretained NSString* protocolOptionalMethods;
 
 } POClassKeys;
 
@@ -27,159 +33,15 @@ const struct POClassKeys POClassKeys =
     .properties = @"properties",
     .classMethods = @"class_methods",
     .instanceMethods = @"instance_methods",
+    .protocols = @"protocols",
+    .protocolName = @"protocol_name",
+    .protocolProperties = @"protocol_properties",
+    .protocolMandatoryMethods = @"protocol_mandatory_methods",
+    .protocolOptionalMethods = @"protocol_optional_methods",
 };
-
-static NSString* property_getType(objc_property_t property)
-{
-    @try
-    {
-        const char *attributes = property_getAttributes(property);
-        char buffer[1 + strlen(attributes)];
-        strcpy(buffer, attributes);
-        char *state = buffer, *attribute;
-        while ((attribute = strsep(&state, ",")) != NULL)
-        {
-            if (attribute[0] == 'T' && attribute[1] != '@')
-            {
-                NSString* result = [NSString stringWithFormat:@"%s", [[NSData dataWithBytes:(attribute + 1) length:strlen(attribute) - 1] bytes]];
-                return result;
-            }
-            else if (attribute[0] == 'T' && attribute[1] == '@' && strlen(attribute) == 2)
-            {
-                return @"id";
-            }
-            else if (attribute[0] == 'T' && attribute[1] == '@')
-            {
-                NSString* result = [NSString stringWithFormat:@"%s", [[NSData dataWithBytes:(attribute + 3) length:strlen(attribute) - 4] bytes]];
-                if ([result rangeOfString:@"<"].location != NSNotFound)
-                {
-                    result = [NSString stringWithFormat:@"id%@", result];
-                }
-                return result;
-            }
-        }
-        return @"";
-    }
-    @catch (NSException *exception)
-    {
-        return @"";
-    }
-    @finally
-    {
-        
-    }
-}
-
-const char * property_getRetentionMethod( objc_property_t property )
-{
-	const char * attrs = property_getAttributes( property );
-	if ( attrs == NULL )
-		return (NULL);
-
-    NSString* attributes = [NSString stringWithCString:attrs encoding:NSUTF8StringEncoding];
-    NSString* result = @"";
-    if ([attributes rangeOfString:@",N,"].location != NSNotFound)
-    {
-        result = [NSString stringWithFormat:@"%@nonatomic", result];
-    }
-    else
-    {
-        result = [NSString stringWithFormat:@"%@atomic", result];
-    }
-    
-    if ([attributes rangeOfString:@",R,"].location != NSNotFound)
-    {
-        result = [NSString stringWithFormat:@"%@, readonly", result];
-    }
-    
-    if ([attributes rangeOfString:@",C,"].location != NSNotFound)
-    {
-        result = [NSString stringWithFormat:@"%@, copy", result];
-    }
-    else if ([attributes rangeOfString:@",&,"].location != NSNotFound)
-    {
-        result = [NSString stringWithFormat:@"%@, strong", result];
-    }
-    else
-    {
-        result = [NSString stringWithFormat:@"%@, weak", result];
-    }
-
-    return [result UTF8String];
-}
-
-static const char* method_returnValueType(Method method)
-{
-    char* type = method_copyReturnType(method);
-    switch(type[0])
-    {
-        case 'c':
-            return "char";
-            break;
-        case 'C':
-            return "unsigned char";
-            break;
-        case 's':
-            return "short";
-            break;
-        case 'S':
-            return "unsigned short";
-            break;
-        case 'i':
-            return "int";
-            break;
-        case 'I':
-            return "unsigned int";
-            break;
-        case 'l':
-            return "long";
-            break;
-        case 'L':
-            return "unsigned long";
-            break;
-        case 'q':
-            return "long long";
-            break;
-        case 'Q':
-            return "unsigned long long";
-            break;
-        case 'f':
-            return "float";
-            break;
-        case 'd':
-            return "double";
-            break;
-        case 'v':
-            return "void";
-            break;
-        case '@':
-            return "id";
-            break;
-        case '#':
-            return "Class";
-            break;
-        case ':':
-            return "SEL";
-            break;
-        case '*':
-            return "char*";
-            break;
-        case '?':
-            return "unknown";
-            break;
-        case 'b':
-            return "bit";
-            break;
-    }
-    return "";
-}
 
 @implementation POPropertyMetaData
 
-- (NSString*)description
-{
-    return [NSString stringWithFormat:@"POPropertyMetaData: \n property name %@ \n property type %@ \n", self.name, self.type];
-}
 
 @end
 
@@ -286,8 +148,7 @@ static const char* method_returnValueType(Method method)
             if(property_getName(property))
             {
                 propertyMetaData.name = [NSString stringWithCString:property_getName(property) encoding:NSStringEncodingConversionAllowLossy];
-                propertyMetaData.type = property_getType(property);
-                propertyMetaData.attributes = [NSString stringWithCString:property_getRetentionMethod(property) encoding:NSStringEncodingConversionAllowLossy];
+                propertyMetaData.attributes = decode_property(property);
             }
             
             [propertiesMetaDataList addObject:propertyMetaData];
@@ -318,12 +179,10 @@ static const char* method_returnValueType(Method method)
             }
             
             POMethodMetaData* methodMetaData = [POMethodMetaData new];
-            methodMetaData.signature = methodSignature;
-            methodMetaData.returnValue = [NSString stringWithCString:method_returnValueType(instanceMethods[i]) encoding:NSStringEncodingConversionAllowLossy];
+            methodMetaData.signature = decode_method_signature(instanceMethods[i]);
             [instanceMethodsMetaDataList addObject:methodMetaData];
         }
         free(instanceMethods);
-
 
         unsigned int numClassMethods = 0;
         Method* classMethods = class_copyMethodList(object_getClass(__class), &numClassMethods);
@@ -332,16 +191,57 @@ static const char* method_returnValueType(Method method)
         for(int i = 0; i < numClassMethods; ++i)
         {
             POMethodMetaData* methodMetaData = [POMethodMetaData new];
-            methodMetaData.signature = NSStringFromSelector(method_getName(classMethods[i]));
-            methodMetaData.returnValue = [NSString stringWithCString:method_returnValueType(classMethods[i]) encoding:NSStringEncodingConversionAllowLossy];
+            methodMetaData.signature = decode_method_signature(classMethods[i]);
             [classMethodsMetaDataList addObject:methodMetaData];
+
         }
         free(classMethods);
 
         classMetaData.instanceMethods = [NSArray arrayWithArray:instanceMethodsMetaDataList];
         classMetaData.classMethods = [NSArray arrayWithArray:classMethodsMetaDataList];
 
+        unsigned int numProtocols;
+        __unsafe_unretained Protocol **protocols = class_copyProtocolList(object_getClass(__class), &numProtocols);
+
+        NSMutableArray* protocolsMetaDataList = [NSMutableArray new];
+        for (int i = 0; i < numProtocols; ++i)
+        {
+            Protocol *protocol = *(protocols + i);
+            POProtocolMetaData* protocolMetaData = [POProtocolMetaData new];
+            protocolMetaData.name = [NSString stringWithCString:protocol_getName(protocol) encoding:NSStringEncodingConversionAllowLossy];
+
+            unsigned int numMandatoryMethods = 0;
+            struct objc_method_description* mandatoryMethods = protocol_copyMethodDescriptionList(protocol, YES, YES, &numMandatoryMethods);
+
+            NSMutableArray* mandatoryMethodsMetaDataList = [NSMutableArray new];
+            for(int i = 0; i < numMandatoryMethods; ++i)
+            {
+                POMethodMetaData* methodMetaData = [POMethodMetaData new];
+                methodMetaData.signature = NSStringFromSelector(mandatoryMethods[i].name);
+                [mandatoryMethodsMetaDataList addObject:methodMetaData];
+            }
+
+            unsigned int numOptionalMethods = 0;
+            struct objc_method_description* optionalMethods = protocol_copyMethodDescriptionList(protocol, NO, YES, &numOptionalMethods);
+
+            NSMutableArray* optionalMethodsMetaDataList = [NSMutableArray new];
+            for(int i = 0; i < numOptionalMethods; ++i)
+            {
+                POMethodMetaData* methodMetaData = [POMethodMetaData new];
+                methodMetaData.signature = NSStringFromSelector(optionalMethods[i].name);
+                [optionalMethodsMetaDataList addObject:methodMetaData];
+            }
+
+            protocolMetaData.mandatoryMethods = mandatoryMethodsMetaDataList;
+            protocolMetaData.optionalMethods = optionalMethodsMetaDataList;
+            [protocolsMetaDataList addObject:protocolMetaData];
+        }
+        free(protocols);
+
+        classMetaData.protocols = protocolsMetaDataList;
+
         [metaData addObject:classMetaData];
+
     }
 
     NSMutableDictionary* classesToJson = [NSMutableDictionary new];
@@ -351,19 +251,42 @@ static const char* method_returnValueType(Method method)
         NSMutableArray* classMethods = [NSMutableArray new];
         for(POMethodMetaData* methodMetaData in classMetaData.classMethods)
         {
-            [classMethods addObject:[NSString stringWithFormat:@"+ (%@) %@;", methodMetaData.returnValue, methodMetaData.signature]];
+            [classMethods addObject:[NSString stringWithFormat:@"+ %@;", methodMetaData.signature]];
         }
 
         NSMutableArray* instanceMethods = [NSMutableArray new];
         for(POMethodMetaData* methodMetaData in classMetaData.instanceMethods)
         {
-            [instanceMethods addObject:[NSString stringWithFormat:@"- (%@) %@;", methodMetaData.returnValue, methodMetaData.signature]];
+            [instanceMethods addObject:[NSString stringWithFormat:@"- %@;", methodMetaData.signature]];
         }
 
         NSMutableArray* properties = [NSMutableArray new];
         for(POPropertyMetaData* propertyMetaData in classMetaData.properties)
         {
-            [properties addObject:[NSString stringWithFormat:@"(%@) %@ %@", propertyMetaData.attributes, propertyMetaData.type, propertyMetaData.name]];
+            [properties addObject:[NSString stringWithFormat:@"%@ %@", propertyMetaData.attributes, propertyMetaData.name]];
+        }
+
+        NSMutableArray* protocols = [NSMutableArray new];
+        for(POProtocolMetaData* protocolMetaData in classMetaData.protocols)
+        {
+            NSMutableArray* mandatoryMethods = [NSMutableArray new];
+            for(POMethodMetaData* methodMetaData in protocolMetaData.mandatoryMethods)
+            {
+                [mandatoryMethods addObject:[NSString stringWithFormat:@"- (void) %@;", methodMetaData.signature]];
+            }
+
+            NSMutableArray* optionalMethods = [NSMutableArray new];
+            for(POMethodMetaData* methodMetaData in protocolMetaData.optionalMethods)
+            {
+                [optionalMethods addObject:[NSString stringWithFormat:@"- (void) %@;", methodMetaData.signature]];
+            }
+            
+            NSDictionary* protocolToJson = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            protocolMetaData.name, POClassKeys.protocolName,
+                                            mandatoryMethods, POClassKeys.protocolMandatoryMethods,
+                                            optionalMethods, POClassKeys.protocolOptionalMethods,
+                                            nil];
+            [protocols addObject:protocolToJson];
         }
         
         NSDictionary* classToJson = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -372,6 +295,7 @@ static const char* method_returnValueType(Method method)
                                      classMethods, POClassKeys.classMethods,
                                      instanceMethods, POClassKeys.instanceMethods,
                                      properties, POClassKeys.properties,
+                                     protocols, POClassKeys.protocols,
                                      nil];
         
         [classesList addObject:classToJson];

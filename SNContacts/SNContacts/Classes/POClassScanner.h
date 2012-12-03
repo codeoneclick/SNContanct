@@ -11,15 +11,13 @@
 @interface POPropertyMetaData  : NSObject
 
 @property (strong, nonatomic) NSString* name;
-@property (strong, nonatomic) NSString* type;
-@property (strong, nonatomic) NSArray* attributes;
+@property (strong, nonatomic) NSString* attributes;
 
 @end
 
 @interface POMethodMetaData : NSObject
 
 @property (strong, nonatomic) NSString* signature;
-@property (strong, nonatomic) NSString* returnValue;
 
 @end
 
@@ -27,7 +25,8 @@
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSArray* properties;
-@property (strong, nonatomic) NSArray* methods;
+@property (strong, nonatomic) NSArray* mandatoryMethods;
+@property (strong, nonatomic) NSArray* optionalMethods;
 
 @end
 
